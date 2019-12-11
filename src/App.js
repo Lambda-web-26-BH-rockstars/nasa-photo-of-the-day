@@ -4,13 +4,14 @@ import "./App.css"
 
 import Photo from './components/Photo.js'
 import NavBar from './components/NavBar.js'
+import ContentBox from  './components/ContentBox.js'
 
 function App() {
 
   const [photoOfTheDay, setPhotoOfTheDay] = useState('')
 
   useEffect(()=>{
-    axios.get('https://api.nasa.gov/planetary/apod?api_key=EwTD8nntFpQflSE62RAmu8EfYamxWLU95x1Gau7D&date=2019-12-10')
+    axios.get('https://api.nasa.gov/planetary/apod?api_key=EwTD8nntFpQflSE62RAmu8EfYamxWLU95x1Gau7D&date=2019-12-11')
       .then(res =>{
         console.log(res.data)
         setPhotoOfTheDay(res.data)
@@ -18,7 +19,7 @@ function App() {
       .catch(err =>{
         console.log(err)
         setPhotoOfTheDay({
-          copyright: "Anna Gru",
+          copyright: "Anna Gru in Riga, Latvia",
           date: "",
           explanation: "You have selected an invaid date, please try another date",
           hdurl: "https://images.unsplash.com/photo-1572280135715-edc1567580aa",
@@ -38,6 +39,7 @@ function App() {
       <Photo 
         photoOfTheDay={photoOfTheDay} 
       />
+      <ContentBox explanation={photoOfTheDay.explanation}/>
     </div>
   );
 }

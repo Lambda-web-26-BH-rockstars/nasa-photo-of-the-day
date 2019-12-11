@@ -34,3 +34,27 @@ nav {
   height: 3rem;
 }
 
+.contentBox {
+  width: 80%;
+  margin:1rem;
+}
+
+.explanation {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: lavenderblush;
+  line-height: 1.5rem;
+  text-align: justify;
+}
+
+.photoCopyright{
+  background: rgba(0, 0, 0, 0.8);
+  padding: .5rem 2rem;
+  border-radius: .5rem;
+  text-align: right;
+  color: white;
+  position: relative;
+  bottom: 3rem;
+  right: 2rem;
+}
+
