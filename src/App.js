@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react"
 import axios from 'axios'
 import "./App.css"
 
+import Photo from './components/Photo.js'
+
 function App() {
 
   const [photoOfTheDay, setPhotoOfTheDay] = useState('')
@@ -20,7 +22,9 @@ function App() {
   return (
     <div className="App">
       <div className="photoHolder">
-        <img src={photoOfTheDay.url} alt={photoOfTheDay.title} />
+        <Photo 
+          photoOfTheDay={photoOfTheDay} 
+        />
       </div>
     </div>
   );
