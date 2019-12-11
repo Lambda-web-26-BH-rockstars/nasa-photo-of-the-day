@@ -3,6 +3,7 @@ import axios from 'axios'
 import "./App.css"
 
 import Photo from './components/Photo.js'
+import NavBar from './components/NavBar.js'
 
 function App() {
 
@@ -16,16 +17,27 @@ function App() {
       })
       .catch(err =>{
         console.log(err)
+        setPhotoOfTheDay({
+          copyright: "Anna Gru",
+          date: "",
+          explanation: "You have selected an invaid date, please try another date",
+          hdurl: "https://images.unsplash.com/photo-1572280135715-edc1567580aa",
+          media_type: "image",
+          service_version: "yes",
+          title: "404 Photo Not Found",
+          url: "https://images.unsplash.com/photo-1572280135715-edc1567580aa"
+        })
       })
   },[])
 
   return (
     <div className="App">
-      <div className="photoHolder">
-        <Photo 
-          photoOfTheDay={photoOfTheDay} 
-        />
-      </div>
+      <NavBar 
+        photoOfTheDay={photoOfTheDay} 
+      />
+      <Photo 
+        photoOfTheDay={photoOfTheDay} 
+      />
     </div>
   );
 }
