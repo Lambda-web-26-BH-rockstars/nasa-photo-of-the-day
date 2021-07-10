@@ -1,13 +1,77 @@
-import React from "react";
-import "./App.css";
+import React, {useEffect, useState} from "react"
+import axios from 'axios'
+import "./App.css"
+
+import Photo from './components/Photo.js'
+import NavBar from './components/NavBar.js'
+import ContentBox from  './components/ContentBox.js'
 
 function App() {
+
+  const [photoOfTheDay, setPhotoOfTheDay] = useState('')
+  const [year, setYear] = useState(2019)
+  const [month, setMonth] = useState(11)
+  const [day, setDay] = useState(11)
+  const nasaAPIKey = 'EwTD8nntFpQflSE62RAmu8EfYamxWLU95x1Gau7D'
+
+  useEffect(()=>{
+    axios.get(`https://api.nasa.gov/planetary/apod?api_key=${nasaAPIKey}&date=${year}-${month}-${day}`)
+      .then(res =>{
+        console.log(res.data)
+        setPhotoOfTheDay(res.data)
+      })
+      .catch(err =>{
+        console.log(err)
+        setPhotoOfTheDay({
+          copyright: "Anna Gru in Riga, Latvia",
+          date: "",
+          explanation: "You have selected an invaid date, please try another date",
+          hdurl: "https://images.unsplash.com/photo-1572280135715-edc1567580aa",
+          media_type: "image",
+          service_version: "yes",
+          title: "404 Photo Not Found",
+          url: "https://images.unsplash.com/photo-1572280135715-edc1567580aa"
+        })
+      })
+  },[year, month, day])
+
+  const clickHandler = (buttonName) => {
+    switch(buttonName){
+      case 'Yplus':
+        setYear(year + 1)
+        break;
+      case 'Yminus':
+        setYear(year - 1)
+        break;
+      case 'Mplus':
+        setMonth(month + 1)
+        break;
+      case 'Mminus':
+        setMonth(month - 1)
+        break;
+      case 'Dplus':
+        setDay(day + 1)
+        break;
+      case 'Dminus':
+        setDay(day - 1)
+        break;
+      default:
+    }
+  }
+
   return (
     <div className="App">
-      <p>
-        Read through the instructions in the README.md file to build your NASA
-        app! Have fun 🚀!
-      </p>
+      <NavBar 
+        year={year}
+        month={month}
+        day={day}
+        title={photoOfTheDay.title}
+        clickHandler={clickHandler}
+      />
+      <Photo 
+        photoOfTheDay={photoOfTheDay} 
+      />
+      <ContentBox explanation={photoOfTheDay.explanation}/>
     </div>
   );
 }
